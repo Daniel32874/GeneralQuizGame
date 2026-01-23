@@ -21,23 +21,93 @@ geography_options=(
 	"a) Africa | b) Europe | c) Asia | d) North America"
 )
 
-geography_answers=("a" "b" "b" "a" "c")
+geography_answers=("A" "B" "B" "A" "C")
 
-question=0
-for q in "${geography_questions[@]}"; do
-	echo "$q"
-	echo "${geography_options[$question]}"
+geography_question=0
+for g in "${geography_questions[@]}"; do
+	echo "$g"
+	echo "${geography_options[$geography_question]}"
 	read -p "Answer: " answerg
-	answer="${geography_answers[$question]}"
-		if [ "$answerg" == "$answer" ];then
+	answer="${geography_answers[$geography_question]}"
+		if [ "${answerg^}" == "$answer" ];then
 				echo "You got it right!!"
 		else
 				echo "You got it wrong!! The correct answer is: $answer"
 		fi
-		((question++))
+		((geography_question++))
 done
-
+display_menu_options
 }
+
+math_quiz(){
+math_questions=(
+    "1. What is 12 × 8?"
+    "2. Solve for x: 3x + 5 = 20"
+    "3. What is the square root of 144?"
+    "4. What is 45% of 200?"
+    "5. If a triangle has angles of 50° and 60°, what is the third angle?"
+)
+
+math_options=(
+    "a) 88 | b) 96 | c) 108 | d) 100"
+    "a) 3 | b) 4 | c) 5 | d) 6"
+    "a) 10 | b) 11 | c) 12 | d) 14"
+    "a) 80 | b) 85 | c) 90 | d) 95"
+    "a) 60° | b) 70° | c) 80° | d) 90°"
+)
+
+math_answers=("B" "C" "C" "C" "B")
+math_question=0
+for m in "${math_questions[@]}"; do
+	echo "$m"
+	echo "${math_options[$math_question]}"
+	read -p "Answer: " answerm
+	answer="${math_answers[$math_question]}"
+		if [ "${answerm^}" == "$answer" ];then
+				echo "You got it right!!"
+		else
+				echo "You got it wrong!! The correct answer is: $answer"
+		fi
+		((math_question++))
+done
+display_menu_options
+}
+
+science_quiz(){
+science_questions=(
+    "1. What is the chemical symbol for water?"
+    "2. What planet is known as the Red Planet?"
+    "3. What gas do plants absorb for photosynthesis?"
+    "4. What force keeps us on the ground?"
+    "5. What is the center of an atom called?"
+)
+
+science_options=(
+    "a) H2O | b) O2 | c) CO2 | d) H2"
+    "a) Venus | b) Mars | c) Jupiter | d) Saturn"
+    "a) Oxygen | b) Nitrogen | c) Carbon Dioxide | d) Hydrogen"
+    "a) Magnetism | b) Gravity | c) Friction | d) Inertia"
+    "a) Electron | b) Proton | c) Nucleus | d) Neutron"
+)
+
+science_answers=("A" "B" "C" "B" "C")
+science_question=0
+for s in "${science_questions[@]}"; do
+	echo "$s"
+	echo "${science_options[$science_question]}"
+	read -p "Answer: " answers
+	answer="${science_answers[$science_question]}"
+		if [ "${answers^}" == "$answer" ];then
+				echo "You got it right!!"
+		else
+				echo "You got it wrong!! The correct answer is: $answer"
+		fi
+		((science_question++))
+done
+display_menu_options
+}
+
+
 
 display_menu_options(){
 	# This shows all the choices you can pick from and asks you to type one.
