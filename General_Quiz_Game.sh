@@ -179,6 +179,46 @@ done
 display_menu_options
 }
 
+general_quiz(){
+	# Array of general questions
+general_questions=(
+    "1. What is the largest ocean on Earth?"
+    "2. Who wrote the play Romeo and Juliet?"
+    "3. What is the capital of Canada?"
+    "4. How many continents are there on Earth?"
+    "5. What does CPU stand for in computers?"
+)
+
+general_options=(
+    "a) Atlantic Ocean | b) Indian Ocean | c) Pacific Ocean | d) Arctic Ocean"
+    "a) Charles Dickens | b) William Shakespeare | c) Mark Twain | d) Jane Austen"
+    "a) Toronto | b) Vancouver | c) Ottawa | d) Montreal"
+    "a) 5 | b) 6 | c) 7 | d) 8"
+    "a) Central Processing Unit | b) Computer Power Unit | c) Core Processing Utility | d) Central Program Utility"
+)
+
+general_answers=("C" "B" "C" "C" "A")
+
+general_question=0
+for g in "${general_questions[@]}"; do
+	echo "$g"
+	echo "${general_options[$general_question]}"
+	read -p "Answer: " answere
+	answer="${general_answers[$general_question]}"
+		if [ "${answere^}" == "$answer" ];then
+				echo "You got it right!!"
+		else
+				echo "You got it wrong!! The correct answer is: $answer"
+		fi
+		((general_question++))
+done
+display_menu_options
+}
+
+exit_script(){
+	exit
+}
+
 display_menu_options(){
 	# This shows all the choices you can pick from and asks you to type one.
 	echo -e " Pick an option below:
@@ -215,7 +255,7 @@ check_user_input(){
 		general_quiz
 		;;
 	7)
-		end_script   # Stops the program.
+		exit_script   # Stops the program.
 		;;
 	*)
 		display_menu_options   # If you typed a wrong number, it shows the menu again.
