@@ -107,7 +107,77 @@ done
 display_menu_options
 }
 
+basketball_quiz(){
+	# Array of basketball questions
+basketball_questions=(
+    "1. How many players from one team are on the court during a basketball game?"
+    "2. How many points is a free throw worth?"
+    "3. What is it called when a player scores three baskets in a row?"
+    "4. How long is a standard NBA game (not including overtime)?"
+    "5. Who is known as the NBA all-time leading scorer?"
+)
 
+basketball_options=(
+    "a) 4 | b) 5 | c) 6 | d) 7"
+    "a) 1 | b) 2 | c) 3 | d) 4"
+    "a) Triple | b) Three-peat | c) Hat trick | d) Triple score"
+    "a) 36 minutes | b) 40 minutes | c) 48 minutes | d) 60 minutes"
+    "a) Michael Jordan | b) Kobe Bryant | c) LeBron James | d) Kareem Abdul-Jabbar"
+)
+
+basketball_answers=("B" "A" "B" "C" "C")
+
+basketball_question=0
+for b in "${basketball_questions[@]}"; do
+	echo "$b"
+	echo "${basketball_options[$basketball_question]}"
+	read -p "Answer: " answerb
+	answer="${basketball_answers[$basketball_question]}"
+		if [ "${answerb^}" == "$answer" ];then
+				echo "You got it right!!"
+		else
+				echo "You got it wrong!! The correct answer is: $answer"
+		fi
+		((basketball_question++))
+done
+display_menu_options
+}
+
+soccer_quiz(){
+	# Array of soccer questions
+soccer_questions=(
+    "1. How many players are on the field for one soccer team?"
+    "2. What part of the body cannot touch the ball during play (except the goalkeeper)?"
+    "3. How long is a standard professional soccer match?"
+    "4. What is it called when a player scores three goals in one game?"
+    "5. Which country has won the most FIFA World Cups?"
+)
+
+soccer_options=(
+    "a) 9 | b) 10 | c) 11 | d) 12"
+    "a) Head | b) Chest | c) Arms and hands | d) Legs"
+    "a) 60 minutes | b) 70 minutes | c) 80 minutes | d) 90 minutes"
+    "a) Triple goal | b) Hat trick | c) Three-peat | d) Goal streak"
+    "a) Germany | b) Argentina | c) Italy | d) Brazil"
+)
+
+soccer_answers=("C" "C" "D" "B" "D")
+
+soccer_question=0
+for s in "${soccer_questions[@]}"; do
+	echo "$s"
+	echo "${soccer_options[$soccer_question]}"
+	read -p "Answer: " answers
+	answer="${soccer_answers[$soccer_question]}"
+		if [ "${answers^}" == "$answer" ];then
+				echo "You got it right!!"
+		else
+				echo "You got it wrong!! The correct answer is: $answer"
+		fi
+		((soccer_question++))
+done
+display_menu_options
+}
 
 display_menu_options(){
 	# This shows all the choices you can pick from and asks you to type one.
