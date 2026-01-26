@@ -16,7 +16,7 @@ geography_questions=(
 geography_options=(
 	"a) Short-term vs long-term | b) Rain vs snow | c) Hot vs cold | d) Wind vs humidity"
 	"a) Divergent | b) Convergent | c) Transform | d) Subduction"
-	"a) Tropic of Cancer | b) Etubinquator | c) Prime Meridian | d) Arctic Circle"
+	"a) Tropic of Cancer | b) Equator | c) Prime Meridian | d) Arctic Circle"
 	"a) City expansion | b) Farming | c) Deforestation | d) Pollution"
 	"a) Africa | b) Europe | c) Asia | d) North America"
 )
