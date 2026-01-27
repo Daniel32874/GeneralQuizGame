@@ -260,6 +260,7 @@ check_user_input(){
 	*)
 		display_menu_options   # If you typed a wrong number, it shows the menu again.
 		;;
-	esac	
+	esac
+	check_user_input
 }
 check_user_input
