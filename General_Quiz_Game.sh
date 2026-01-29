@@ -8,7 +8,7 @@ quiz_answer=""
 user_guess=""
 quiz_score=0
 total_score=0
-#initialize quiestions and answers for quizes
+#initialize quiestions and answers for all the quizes
 geography_questions=(
 	"1. What is the difference between weather and climate?"
 	"2. What type of plate boundary causes earthquakes and volcanoes?"
@@ -88,7 +88,8 @@ general_options=(
     "a) Central Processing Unit | b) Computer Power Unit | c) Core Processing Utility | d) Central Program Utility")
 general_answers=("C" "B" "C" "C" "A")
 
-
+#Purpose: Checks if the user's input is valid(if it is one of the 4 options:A, B, C or D)
+#How it works: It converts the user's input to uppercase and checks if it matches one of the valid options(A, B, C or D). If it is valid it sets the variable "Valid_guess" to equal true, if not it sets it to false and tells the user to pick out of the given options
 quiz_user_input_checker(){
 	case ${user_guess^} in
 		A | B | C | D )
@@ -100,34 +101,36 @@ quiz_user_input_checker(){
 	esac
 }
 
+#Purpose: Checks if the user's answer matched the correct answer for that particular question
+#How it works: It compares the user's guess to the correct answer for the current question. If they match it then sets the variable "correct_guess to equal true, if not it is set to false"
 quiz_question_retry(){
-	if [[ "${user_guess^}" != "${geography_answers[question]}" ]]; then
+	if [[ "${user_guess^}" != "${current_answers[question]}" ]]; then
 		correct_guess=false
 	else
 		correct_guess=true
 	fi
 }
+
+#Purpose: Runs the sellected quiz by the user, displays the questions, checks ansswers and tracks the score for said selected quiz
+#How it works: Loops through the quiz questions, presents each question to the user with its options, and waits for an answer from the user. if the answer is correct, the score increases by 1, the loop then continues until all the questions for that particular quiz are answer then prints the user's overall score
 current_quiz(){
 
 		current_question=0
 		score=0
-		echo -e "\nTESTING----------\n"
 		for (( question=0; question<"${#current_questions[@]}"; question++ )); do
 			valid_guess=false
 			correct_guess=true
-			echo "BEFORE WHILE " $valid_guess
-			while [[ $valid_guess == false || current_answers$correct_guess == false ]]; do	
-				echo "IN LOOP "$valid_guess		
+			while [[ $valid_guess == false || current_answers$correct_guess == false ]]; do		
 				echo "${current_questions[question]}"
 				echo "${current_options[question]}"
 				read -p "Select option: " user_guess
 				quiz_user_input_checker
-				echo "BEFORE wHILE " $valid_guess
 				if [[ $valid_guess == true ]]; then
-					echo "IN lOOP "$valid_guess	
 					if [[ "${user_guess^}" == "${current_answers[question]}" ]]; then
 						echo "You got it right!!"
 						((score++))
+					else
+						echo "You got it wrong!! The correct answer was ${current_answers[question]} "
 					fi
 				fi
 
@@ -135,16 +138,16 @@ current_quiz(){
 			done
 		done
 		echo "Score = $score"
-		echo -e "\nTESTING----------\n"
 }
 
-
-
-
+#Purpose: Ends the game by setting the variable "play_game" to equal false
+#How it works: Changes the Variable "play_game" to equal false, which will stop the while loop at the end of the script to exit the game
 exit_script(){
 	play_game=false
 }
 
+#Purpose: Displays the main menu of available quizes and prompts the user to choose one
+#How it works: Prints out the menu with options for which you the user will like to do and prompts the user to choose an option between "1 - 4"
 display_menu_options(){
 	# This shows all the choices you can pick from and asks you to type one.
 	echo -e " Pick an option below:
@@ -153,10 +156,11 @@ display_menu_options(){
 	3. General Quiz
 	4. Exit
 	"
-	read -p "Choose an option (1-7): " function_choice
+	read -p "Choose an option (1-4): " function_choice
 }
 
-
+#Purpose: Processes the user's menu selection and sets up the correct quizbased off the user's menu selection
+#How it works: Based on the user's menu choice between "1-4", it assigns the appropriate set of questions, options, and answers to thee corresponding variables( "current_questions", "current_options", and "current_answers" ). If the user selects an invalid option, it asks the user to try again
 check_user_input(){
 	# This looks at what number you typed and runs the matching action.
 	case  $function_choice in
@@ -185,14 +189,15 @@ check_user_input(){
 }
 
 
-
+#Purpose: The main game loop that runs the entire program
+#How it works: Continuously runs as long as the variable "play_game" is equal to true. it shows the menu, checks the user's choice, and runs the current_quiz function which prints out the appropriate quiz questions and answers. If the user chooses to exit, it stops the loop and ends the game
 while [[ $play_game == true ]]; do
 	display_menu_options
 	
 	check_user_input
-	if [[ $play_game == true ]] 	
+	if [[ $play_game == true ]]; then
 		current_quiz
 	else
-	exit
+		exit
 	fi
 done
