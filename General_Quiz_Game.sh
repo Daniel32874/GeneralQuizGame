@@ -1,13 +1,16 @@
 #!/bin/bash
-clear
+clear#Clears the screen before running the script
+#Global Booleans
 play_game=true
 valid_guess=false
 
+#Global Variables
 current_question=""
 quiz_answer=""
 user_guess=""
 quiz_score=0
 total_score=0
+
 #initialize quiestions and answers for all the quizes
 geography_questions=(
 	"1. What is the difference between weather and climate?"
